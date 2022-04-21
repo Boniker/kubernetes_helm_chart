@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: {{ $.Values.clusterissuer }}
+spec:
+  acme:
+    email: {{ $.Values.email }}
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: {{ $.Values.clusterissuer }}
+    solvers:
+    - http01:
+        ingress:
+          class: {{ $.Values.class }}
